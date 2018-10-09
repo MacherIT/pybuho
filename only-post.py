@@ -2,7 +2,7 @@
 import SimpleHTTPServer
 import SocketServer
 import json
-from requests_toolbelt.multipart import decoder
+# from requests_toolbelt.multipart import decoder
 import urllib
 
 import os
