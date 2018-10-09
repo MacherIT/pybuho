@@ -52,7 +52,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 Handler = ServerHandler
 
 if ON_HEROKU:
-    httpd = SocketServer.TCPServer(("", os.environ.get('PORT')), Handler)
+    httpd = SocketServer.TCPServer(("", int(os.environ.get('PORT'))), Handler)
     print "serving"
 else:
     httpd = SocketServer.TCPServer(("", PORT), Handler)
