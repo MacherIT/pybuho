@@ -50,7 +50,10 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 Handler = ServerHandler
 
-httpd = SocketServer.TCPServer(("", PORT), Handler)
+if ON_HEROKU
+    httpd = SocketServer.TCPServer((""), Handler)
+else
+    httpd = SocketServer.TCPServer(("", PORT), Handler)
 
 print "serving at port", PORT
 try:
