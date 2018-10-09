@@ -21,7 +21,7 @@ class InstapyCli(object):
 
         try:
             media_id = self._session.upload_photo(path)
-            a=self._session.configure_photo(media_id, caption)
+            self._session.configure_photo(media_id, caption)
         except Exception as e:
             print('Error is >>\n    ' + str(e))
             print('\nSomething went bad.\nPlease retry or send an issue on https://github.com/b3nab/instapy-cli\n')
@@ -29,8 +29,6 @@ class InstapyCli(object):
         finally:
             if upload_completed:
                 print('Done.')
-                print a
-                return a
             # media_status = 'YES' if media.isDownloaded() else 'NO'
             # print('Media is a downloaded file? ' + media_status)
             if media.isDownloaded():
