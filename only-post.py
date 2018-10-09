@@ -6,6 +6,7 @@ import json
 import urllib
 
 import os
+ON_HEROKU = os.environ.get('ON_HEROKU')
 
 import re
 import sys
@@ -50,9 +51,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 Handler = ServerHandler
 
-if ON_HEROKU
+if ON_HEROKU:
     httpd = SocketServer.TCPServer((""), Handler)
-else
+else:
     httpd = SocketServer.TCPServer(("", PORT), Handler)
 
 print "serving at port", PORT
