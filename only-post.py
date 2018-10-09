@@ -52,11 +52,13 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 Handler = ServerHandler
 
 if ON_HEROKU:
-    httpd = SocketServer.TCPServer((""), Handler)
+    httpd = SocketServer.TCPServer(("", os.environ.get('PORT')), Handler)
+    print "serving"
 else:
     httpd = SocketServer.TCPServer(("", PORT), Handler)
+    print "serving at port", PORT
 
-print "serving at port", PORT
+
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
