@@ -44,6 +44,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 imagen= urllib.unquote(imagen).decode('utf8')
             if pares.split("=")[0]=="caption":
                 caption=pares.split("=")[1]
+                caption = caption.replace('+',' ').replace('%0A', '\n')
         instapy(["-u", username, "-p",password,"-f",imagen, "-t", caption])
 
 
