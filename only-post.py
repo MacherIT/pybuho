@@ -46,6 +46,8 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 caption=pares.split("=")[1]
                 caption = caption.replace('+',' ').replace('%0A', '\n')
         instapy(["-u", username, "-p",password,"-f",imagen, "-t", caption])
+        # print self.get_route()
+        self.send_response(200)
 
 
 
