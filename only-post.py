@@ -54,11 +54,11 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # if pares.split("=")[0]=="caption":
             #     caption=pares.split("=")[1]
             #     caption = caption.replace('+',' ').replace('%0A', '\n')
-        if username && password && imagen && caption
+        if username and password and imagen and caption:
             instapy(["-u", username, "-p",password,"-f",imagen, "-t", caption])
         # print self.get_route()
             self.send_response(200)
-        else
+        else:
             self.send_response(500)
 
 
