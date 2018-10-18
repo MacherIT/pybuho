@@ -3,6 +3,7 @@ import SimpleHTTPServer
 import SocketServer
 import json
 # from requests_toolbelt.multipart import decoder
+from urlparse import parse_qs
 import urllib
 
 import os
@@ -31,23 +32,34 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         password=""
         imagen=""
         caption=""
-        # parsed_body= post_body.split("&"):
-        # parsed_body[0].split("=").[0]
-        for pares in  post_body.split("&"):
-            if pares.split("=")[0]=="username":
-                username=pares.split("=")[1]
-            if pares.split("=")[0]=="password":
-                password=pares.split("=")[1]
-            # urlencode(imagen)
-            if pares.split("=")[0]=="imagen":
-                imagen=pares.split("=")[1]
-                imagen= urllib.unquote(imagen).decode('utf8')
-            if pares.split("=")[0]=="caption":
-                caption=pares.split("=")[1]
-                caption = caption.replace('+',' ').replace('%0A', '\n')
-        instapy(["-u", username, "-p",password,"-f",imagen, "-t", caption])
+
+        parsed_body = parse_qs(post_body)
+
+        username = parsed_body['username'][0]
+        password = parsed_body['password'][0]
+        imagen = parsed_body['imagen'][0]
+        caption = parsed_body['caption'][0]
+
+        # for pares in  post_body.split("&"):
+            # print pares.split("=")[1].decode("utf-8")
+            # print "----------------"
+            # if pares.split("=")[0]=="username":
+            #     username=pares.split("=")[1]
+            # if pares.split("=")[0]=="password":
+            #     password=pares.split("=")[1]
+            # # urlencode(imagen)
+            # if pares.split("=")[0]=="imagen":
+            #     imagen=pares.split("=")[1]
+            #     imagen= urllib.unquote(imagen).decode('utf8')
+            # if pares.split("=")[0]=="caption":
+            #     caption=pares.split("=")[1]
+            #     caption = caption.replace('+',' ').replace('%0A', '\n')
+        if username && password && imagen && caption
+            instapy(["-u", username, "-p",password,"-f",imagen, "-t", caption])
         # print self.get_route()
-        self.send_response(200)
+            self.send_response(200)
+        else
+            self.send_response(500)
 
 
 
